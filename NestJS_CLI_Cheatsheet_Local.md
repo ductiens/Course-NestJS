@@ -68,21 +68,21 @@ npx nest g s auth --project api
 
 ## Alias
 
-| Đầy đủ | Alias |
-|--------|-------|
-| generate | g |
-| module | mo |
-| controller | co |
-| service | s |
-| middleware | mi |
-| guard | gu |
-| interceptor | in |
-| pipe | pi |
-| filter | f |
-| decorator | d |
-| gateway | ga |
-| resolver | r |
-| provider | pr |
+| Đầy đủ      | Alias |
+| ----------- | ----- |
+| generate    | g     |
+| module      | mo    |
+| controller  | co    |
+| service     | s     |
+| middleware  | mi    |
+| guard       | gu    |
+| interceptor | in    |
+| pipe        | pi    |
+| filter      | f     |
+| decorator   | d     |
+| gateway     | ga    |
+| resolver    | r     |
+| provider    | pr    |
 
 ## Quy trình thường dùng
 
@@ -93,4 +93,43 @@ npx nest g s user
 
 # Hoặc
 npx nest g resource user
+```
+
+## TypeORM
+
+### NestJS + TypeORM
+
+```bash
+npm install @nestjs/typeorm typeorm
+
+# Driver theo từng CSDL
+npm install mysql2 # MySQL
+
+npm install pg # PostgreSQL
+
+npm install mariadb # MariaDB
+
+npm install mssql # SQL Server
+```
+
+### NestJS + MongoDB (Mongoose)
+
+```bash
+# ODM của MongoDB cho NestJS
+npm install @nestjs/mongoose mongoose
+
+# Khai báo biến môi trường
+npm install @nestjs/config
+```
+
+### NestJS + Prisma
+
+```bash
+npx prisma init                     # Khởi tạo Prisma
+npx prisma generate                 # Sinh Prisma Client
+npx prisma migrate dev --name init  # Tạo migration
+npx prisma db push                  # Đồng bộ schema
+npx prisma studio                   # Giao diện quản lý dữ liệu
+npx prisma migrate reset            # Reset CSDL
+npx prisma db seed                  # Chạy seed (nếu cấu hình)
 ```
