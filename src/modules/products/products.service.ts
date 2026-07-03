@@ -14,6 +14,10 @@ export class ProductsService {
     return this.productsRepository.find();
   }
 
+  findOne(id: number) {
+    return this.productsRepository.findOneBy({ id });
+  }
+
   create(productData: Partial<Product>) {
     const product = this.productsRepository.create(productData);
     product.created_at = new Date();
@@ -26,10 +30,6 @@ export class ProductsService {
     await this.productsRepository.update(id, productData);
     return this.productsRepository.findOneBy({ id });
   }
-
-  // findOne(id: string) {
-  //   return this.productsRepository.findOne(id);
-  // }
 
   async remove(id: number) {
     const product = await this.productsRepository.findOneBy({ id });

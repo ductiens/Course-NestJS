@@ -3,11 +3,15 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Patch,
   Post,
+  ValidationPipe,
 } from '@nestjs/common';
-import Product from 'src/entities/Product';
+import CreateProductDto from './dto/create-product.dto';
+import UpdateProductDto from './dto/update-product.dto';
 import { ProductsService } from './products.service';
 
 @Controller('products')
@@ -19,28 +23,31 @@ export class ProductsController {
     return this.productsService.findAll();
   }
 
+  @Get(':id')
+  async findOne(@Param('id') id: number) {
+    const product = await this.productsService.findOne(id);
+    if (!product) {
+      throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
+    }
+    return product;
+  }
+
   @Post()
-  create(@Body() productData: Partial<Product>) {
+  create(@Body(new ValidationPipe()) productData: CreateProductDto) {
     return this.productsService.create(productData);
   }
 
   @Patch(':id')
-  update(@Body() productData: Partial<Product>, @Param('id') id: number) {
+  update(@Body() productData: UpdateProductDto, @Param('id') id: number) {
     return this.productsService.update(id, productData);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
-    return this.productsService.remove(id);
+  async remove(@Param('id') id: number) {
+    const product = await this.productsService.remove(id);
+    if (!product) {
+      throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
+    }
+    return product;
   }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.productsService.findOne(id);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.productsService.remove(id);
-  // }
 }
