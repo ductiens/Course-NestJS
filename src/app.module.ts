@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import Product from './entities/Product';
 import { ProductsModule } from './modules/products/products.module';
 import { UserModule } from './modules/user/user.module';
+import { AuthModule } from './modules/auth/auth.module';
 import User from './entities/User';
 
 @Module({
@@ -21,6 +22,7 @@ import User from './entities/User';
       synchronize: true, // Tự động tạo bảng từ entity (chỉ dùng trong môi trường development)
     }),
     UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
