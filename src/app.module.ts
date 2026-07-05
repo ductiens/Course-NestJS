@@ -4,6 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import Product from './entities/Product';
 import { ProductsModule } from './modules/products/products.module';
+import { UserModule } from './modules/user/user.module';
+import User from './entities/User';
 
 @Module({
   imports: [
@@ -15,9 +17,10 @@ import { ProductsModule } from './modules/products/products.module';
       username: 'root',
       password: '',
       database: 'nestjs01',
-      entities: [Product], // Danh sách các entity sẽ ánh xạ
+      entities: [Product, User], // Danh sách các entity sẽ ánh xạ
       synchronize: true, // Tự động tạo bảng từ entity (chỉ dùng trong môi trường development)
     }),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
